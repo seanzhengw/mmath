@@ -3,6 +3,7 @@
 
 #include "Angles.h"
 #include "EulerAngles.h"
+#include "Length.h"
 #include "Quaternion.h"
 #include "Transform.h"
 #include "Vector3.h"
