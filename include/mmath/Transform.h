@@ -22,7 +22,24 @@ public:
     static constexpr size_t length() { return 6; }
     constexpr T &operator[](uint8_t i);
     constexpr T const &operator[](uint8_t i) const;
+
+    template <typename U>
+    constexpr Transform<T> &operator=(const Transform<U> &t);
+    template <typename U>
+    constexpr Transform<T> &operator+=(const Transform<U> &t);
+    template <typename U>
+    constexpr Transform<T> &operator-=(const Transform<U> &t);
 };
+
+template <typename T>
+constexpr Transform<T> operator+(const Transform<T> &v);
+template <typename T>
+constexpr Transform<T> operator-(const Transform<T> &v);
+
+template <typename T, typename U>
+constexpr Transform<T> operator+(const Transform<T> &t1, const Transform<U> &t2);
+template <typename T, typename U>
+constexpr Transform<T> operator-(const Transform<T> &t1, const Transform<U> &t2);
 
 template <typename T>
 constexpr Transform<T>::Transform(T x, T y, T z, T a, T b, T c)
@@ -76,6 +93,42 @@ constexpr T const &Transform<T>::operator[](uint8_t i) const
     case 5:
         return rot.z;
     }
+}
+
+template <typename T>
+template <typename U>
+constexpr Transform<T> &Transform<T>::operator=(const Transform<U> &t)
+{
+    pos = t.pos;
+    rot = t.rot;
+}
+
+template <typename T>
+template <typename U>
+constexpr Transform<T> &Transform<T>::operator+=(const Transform<U> &t)
+{
+    pos += t.pos;
+    rot += t.rot;
+}
+
+template <typename T>
+template <typename U>
+constexpr Transform<T> &Transform<T>::operator-=(const Transform<U> &t)
+{
+    pos -= t.pos;
+    rot -= t.rot;
+}
+
+template <typename T, typename U>
+constexpr Transform<T> operator+(const Transform<T> &t1, const Transform<U> &t2)
+{
+    return Transform<T>(t1.pos + t2.pos, t1.rot + t2.rot);
+}
+
+template <typename T, typename U>
+constexpr Transform<T> operator-(const Transform<T> &t1, const Transform<U> &t2)
+{
+    return Transform<T>(t1.pos - t2.pos, t1.rot - t2.rot);
 }
 
 using TransformF = Transform<float>;
