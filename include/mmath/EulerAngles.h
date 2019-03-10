@@ -2,7 +2,9 @@
 #define MMATH_EULERANGLES_H_
 
 #include <cstdint>
+#include <cmath>
 #include "Vector3.h"
+#include "Quaternion.h"
 
 namespace mmath
 {
@@ -12,6 +14,8 @@ class EulerAngles
 public:
     template <typename T>
     static constexpr void SimplifyXYZ(Vector<3, T> &v);
+    template <typename T>
+    static constexpr T AngleXYZ(const Vector<3, T> &v1, const Vector<3, T> &v2);
 };
 
 template <typename T>
@@ -43,6 +47,15 @@ constexpr void EulerAngles::SimplifyXYZ(Vector<3, T> &v)
         v.z = radiansWrap(v.z - M_PI);
         return;
     }
+}
+
+template <typename T>
+constexpr T EulerAngles::AngleXYZ(const Vector<3, T> &v1, const Vector<3, T> &v2)
+{
+    Quaternion<T> q1, q2;
+    q1.FromEulerXYZ(v1);
+    q2.FromEulerXYZ(v2);
+    return q1.Angle(q2);
 }
 
 using Euler = EulerAngles;
