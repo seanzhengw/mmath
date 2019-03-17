@@ -36,7 +36,13 @@ template <typename T>
 class Vector<3, T>
 {
 public:
-    T x, y, z;
+    union {
+        T buf[3];
+        struct
+        {
+            T x, y, z;
+        };
+    };
 
     constexpr Vector() = default;
     constexpr Vector(Vector const &v) = default;
@@ -45,6 +51,7 @@ public:
     static constexpr size_t length() { return 3; }
     constexpr T &operator[](uint8_t i);
     constexpr T const &operator[](uint8_t i) const;
+    constexpr T *data();
 
     constexpr Vector<3, T> &operator=(const Vector<3, T> &v) = default;
     template <typename U>
@@ -130,6 +137,12 @@ constexpr T const &Vector<3, T>::operator[](uint8_t i) const
     case 2:
         return z;
     }
+}
+
+template <typename T>
+constexpr T *Vector<3, T>::data()
+{
+    return buf;
 }
 
 template <typename T>
