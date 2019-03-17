@@ -1,0 +1,32 @@
+{
+    "name": "mmath",
+    "keywords": "3d, math",
+    "description": "3D mathematics library",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/seanzhengw/mmath.git"
+    },
+    "authors": [
+        {
+            "name": "Sean Zheng",
+            "email": "seanzhengw@gmail.com",
+            "maintainer": true
+        }
+    ],
+    "dependencies": [],
+    "version": "0.1.0",
+    "frameworks": "*",
+    "platforms": "*",
+    "include": [
+        "include/*"
+    ],
+    "exclude": [
+        "doc/*",
+        "test/*"
+    ],
+    "build": {
+        "flags": [
+            "-I include"
+        ]
+    }
+}
