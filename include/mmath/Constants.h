@@ -30,9 +30,15 @@
 namespace mmath
 {
 
+#ifndef PI
 constexpr static double PI = 3.14159265358979323846;
+#endif
+#ifndef HALF_PI
 constexpr static double HALF_PI = PI / 2;
+#endif
+#ifndef TWO_PI
 constexpr static double TWO_PI = PI * 2;
+#endif
 
 } // namespace mmath
 
