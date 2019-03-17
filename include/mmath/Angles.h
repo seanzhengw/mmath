@@ -27,7 +27,7 @@
 #ifndef MMATH_ANGLES_H_
 #define MMATH_ANGLES_H_
 
-#include <cmath>
+#include "Constants.h"
 
 namespace mmath
 {
@@ -46,24 +46,24 @@ public:
 
 constexpr double Angles::RadToDeg()
 {
-    return 180.0 / M_PI;
+    return 180.0 / PI;
 }
 
 constexpr double Angles::DegToRad()
 {
-    return M_PI / 180.0;
+    return PI / 180.0;
 }
 
 template <typename T>
 constexpr T Angles::RadToDeg(T rad)
 {
-    return rad * 180.0 / M_PI;
+    return rad * 180.0 / PI;
 }
 
 template <typename T>
 constexpr T Angles::DegToRad(T deg)
 {
-    return deg * M_PI / 180.0;
+    return deg * PI / 180.0;
 }
 
 } // namespace mmath

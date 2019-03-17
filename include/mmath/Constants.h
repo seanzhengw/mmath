@@ -24,41 +24,15 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef MMATH_UTIL_H_
-#define MMATH_UTIL_H_
-
-#include <algorithm>
-#include <cmath>
-#include "Constants.h"
+#ifndef MMATH_CONSTANTS_H_
+#define MMATH_CONSTANTS_H_
 
 namespace mmath
 {
 
-// limit value into range [min, max]
-inline double clamp(double value, double min, double max)
-{
-    return std::max(min, std::min(max, value));
-}
-
-// wrap radians to coterminal angles in range (-π, π]
-inline double radiansWrap(double r)
-{
-    for (; r > PI;)
-    {
-        r -= TWO_PI;
-    }
-    for (; r <= -PI;)
-    {
-        r += TWO_PI;
-    }
-    return r;
-}
-
-// is the different of v1 and v2 less than range
-inline bool closeEnough(double v1, double v2, double range)
-{
-    return abs(v1 - v2) <= range;
-}
+constexpr static double PI = 3.14159265358979323846;
+constexpr static double HALF_PI = PI / 2;
+constexpr static double TWO_PI = PI * 2;
 
 } // namespace mmath
 
