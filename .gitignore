@@ -1,0 +1,7 @@
+
+# Unit test cmake generated files
+test/*
+!test/CMakeLists.txt
+!test/.mbedignore
+!test/README.md
+!test/mmath
