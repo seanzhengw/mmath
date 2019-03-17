@@ -38,10 +38,16 @@ template <typename T>
 class Quaternion
 {
 public:
-    T x, y, z, w;
+    union {
+        T buf[4];
+        struct
+        {
+            T x, y, z, w;
+        };
+    };
 
-    constexpr Quaternion() = default;
-    constexpr Quaternion(const Quaternion &v) = default;
+    constexpr Quaternion();
+    constexpr Quaternion(const Quaternion &v);
     constexpr Quaternion(T x, T y, T z, T w);
 
     constexpr Vector<3, T> ToEulerXYZ();
@@ -52,6 +58,19 @@ public:
 
 template <typename T>
 constexpr Quaternion<T> operator*(const Quaternion<T> &q1, const Quaternion<T> &q2);
+
+template <typename T>
+constexpr Quaternion<T>::Quaternion()
+    : x(0), y(0), z(0), w(1)
+{
+}
+
+template <typename T>
+constexpr Quaternion<T>::Quaternion(const Quaternion &v)
+    : x(v.x), y(v.y), z(v.z), w(v.w)
+{
+}
+
 
 template <typename T>
 constexpr Quaternion<T>::Quaternion(T x, T y, T z, T w)
